@@ -1,24 +1,11 @@
-ARG UPSTREAM_REPO
-ARG UPSTREAM_TAG
-FROM ${UPSTREAM_REPO:-uselagoon}/mariadb-10.6:${UPSTREAM_TAG:-latest}
+FROM bitnami/mysql:8.0.34
 
 ARG LAGOON_VERSION
 ENV LAGOON_VERSION=$LAGOON_VERSION
 
-USER root
-RUN apk add --no-cache openssh-keygen
-
-COPY ./legacy-migration-scripts/* /legacy-migration-scripts/
-RUN chown -R mysql /legacy-migration-scripts/ \
-    && /bin/fix-permissions /legacy-migration-scripts/
-
-USER mysql
-
-ENV MARIADB_DATABASE=infrastructure \
-    MARIADB_USER=api \
-    MARIADB_PASSWORD=api \
-    MARIADB_CHARSET=utf8 \
-    MARIADB_COLLATION=utf8_general_ci
-
-COPY ./rerun_initdb.sh /rerun_initdb.sh
-COPY ./legacy_rerun_initdb.sh /legacy_rerun_initdb.sh
+ENV ALLOW_EMPTY_PASSWORD=yes \
+    MYSQL_USER=api \
+    MYSQL_PASSWORD=api \
+    MYSQL_DATABASE=infrastructure \
+    MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password \
+    MYSQL_SQL_MODE=NO_ENGINE_SUBSTITUTION
