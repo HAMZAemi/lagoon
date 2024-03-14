@@ -15,7 +15,7 @@
                 table.string('type', 100).notNullable();
                 table.integer('environment');
                 table.integer('project');
-                table.string('group_name', 50);
+                table.string('group_name', 300);
                 table.enu('permission', ['GUEST', 'DEVELOPER', 'MAINTAINER']).defaultTo('GUEST');
                 table.specificType('command', 'text');
                 table.string('confirmation_text', 2000);
@@ -126,12 +126,12 @@
                 table.integer('environment');
                 table.string('severity', 300).defaultTo('');
                 table.decimal('severity_score', 1, 1).defaultTo(0);
-                table.string('identifier', 50).notNullable();
-                table.string('lagoon_service', 50).defaultTo('');
+                table.string('identifier', 100).notNullable();
+                table.string('lagoon_service', 100).defaultTo('');
                 table.string('source', 300).defaultTo('');
                 table.string('associated_package', 300).defaultTo('');
                 table.specificType('description', 'text');
-                table.string('version', 50).defaultTo('');
+                table.string('version', 100).defaultTo('');
                 table.string('fixed_version', 300).defaultTo('');
                 table.string('links', 300).defaultTo('');
                 table.json('data');
