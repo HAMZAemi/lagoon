@@ -4,6 +4,8 @@ services:
     image: ${IMAGE_REPO:-lagoon}/api-db
     ports:
       - '3366:3306'
+    environment:
+      - MARIADB_PASSWORD=api
   webhook-handler:
     image: ${IMAGE_REPO:-lagoon}/webhook-handler
     command: yarn run dev
@@ -153,6 +155,8 @@ services:
     environment:
       - KEYCLOAK_FRONTEND_URL=http://localhost:8088/auth/
       - KEYCLOAK_ADMIN_EMAIL=admin@example.com
+      - DB_VENDOR=mysql
+      - LAGOON_DB_VENDOR=mysql
       # Uncomment for local new relic tracking
       # - NEW_RELIC_LICENSE_KEY=
       # - NEW_RELIC_APP_NAME=keycloak-local
@@ -165,6 +169,8 @@ services:
     image: ${IMAGE_REPO:-lagoon}/keycloak-db
     ports:
       - '3336:3306'
+    environment:
+      - MARIADB_PASSWORD=keycloak
   tests-kubernetes:
     image: ${IMAGE_REPO:-lagoon}/tests
     environment:
