@@ -1,4 +1,4 @@
-# Lagoon
+# EL KHADRI HAMZA Lagoon
 
 ![](./lagoon-logo.png)
 
